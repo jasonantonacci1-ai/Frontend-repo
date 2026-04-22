@@ -31,5 +31,10 @@ pipeline {
                sh 'docker push jasonantonacci1/frontend-app'
            }
        }
+       stage('Trigger Config Pipeline') {
+           steps {
+               sh 'curl -X POST http://localhost:8080/generic-webhook-trigger/invoke?token=your-trigger-token'
+           }
+       }
     }
 }
