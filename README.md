@@ -1,1 +1,4 @@
-Repository for the frontend of the Goals Project.
+# Frontend-repo
+
+Terraform Infrastructure made. keeping phases consistant
+
