@@ -40,8 +40,8 @@ pipeline {
     }
     post {
         failure {
-            mail to: 'jasonantonacci2@gmail.com'
-                 subject: 'Pipleine Failure Report'
+            mail to: 'jasonantonacci2@gmail.com',
+                 subject: 'Pipleine Failure Report',
                  body: "The frontend pipeline has failed. Please check the logs here: ${env.BUILD_URL}"
         }
     }
