@@ -8,7 +8,9 @@ pipeline {
        }
        stage('Build Docker Image') {
            steps {
+               dir('frontend') {
                sh 'docker build -t jasonantonacci1/frontend-app .'
+             }
           }
        }
        stage('Critical security scan') {
