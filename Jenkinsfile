@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir('frontend') {
                     withSonarQubeEnv('sonarqube') {
-                        sh /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner -Dsonar.projectKey=frontend-repo'
+                        sh '/opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner -Dsonar.projectKey=frontend-repo'
                     }
                 }
             timeout(time: 5, unit: 'MINUTES') {
