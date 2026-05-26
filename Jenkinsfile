@@ -20,15 +20,17 @@ pipeline {
           } 
        }
        stage('Code quality scan') {
-           steps {
-               withSonarQubeEnv('sonarqube') {
-                   sh 'sonar-scanner'
-               }
-           timeout(time: 5, unit: 'MINUTES') {
-               waitForQualityGate abortPipeline: true
-               }
-           }
-       }
+            steps {
+                dir('frontend') {
+                    withSonarQubeEnv('sonarqube') {
+                        sh '/opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner'
+                    }
+                }
+            timeout(time: 5, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+                }
+            }
+        }
        stage('Push Image') {
            steps {
                sh 'docker push jasonantonacci1/frontend-app'
