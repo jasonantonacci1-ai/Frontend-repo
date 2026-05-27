@@ -32,10 +32,15 @@ pipeline {
             }
         }
        stage('Push Image') {
-           steps {
-               sh 'docker push jasonantonacci1/frontend-app'
-           }
-       }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-credentials', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                    
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push jasonantonacci1/frontend-app'
+                    
+                }
+            }
+        }
        stage('Trigger Config Pipeline') {
            steps {
                sh 'curl -X POST http://localhost:8080/generic-webhook-trigger/invoke?token=your-trigger-token'
